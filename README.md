@@ -1,1 +1,1 @@
-# rockPaperScissors
+Calculator App using Plain HTML CSS and JavaScript
