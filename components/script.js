@@ -17,12 +17,20 @@ function isValidParentheses(str) {
     }
     return (count === 0);
 }
-function calculate1(str) {
-    if (isValidParentheses(str)) {
-        const value = calculate2(str);
-        return value;
+function operatorChecker(str) {
+    const n = str.length;
+    for (let i = 0; i < n - 1; i++) {
+        if ((str[i] === "-" || str[i] === "/" || str[i] === "*" || str[i] === "+") && (str[i + 1] == "/" || str[i + 1] == "*" || str[i + 1] == "+"))
+            return false;
     }
-    return "error";
+    return true;
+}
+function calculate1(str) {
+    if (isValidParentheses(str) && operatorChecker(str)) {
+        const value = calculate2(str);
+        return value.toString();
+    }
+    return "err";
 }
 
 // heading
