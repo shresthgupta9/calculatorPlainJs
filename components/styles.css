@@ -1,8 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
+
 * {
   margin: 0;
   padding: 0;
+  font-family: "Crimson Text", serif;
 }
 
 .text-center {
   text-align: center;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+}
+
+header div h1 {
+  font-family: "Poppins", sans-serif;
+}
+
+.input input {
+  padding: 10px 0;
+  margin: 20px 0;
+  width: 325px;
+  border-width: thin;
+}
+
+.btns {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: auto auto auto auto;
+}
+
+.btn {
+  padding: 17px 28px;
+  margin: 5px;
+  border-radius: 50px;
 }
