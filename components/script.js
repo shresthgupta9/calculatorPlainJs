@@ -1,4 +1,6 @@
-// keyboard bug- when in input box, each button pressed twice
+// no known bugs as of now
+
+console.log("Controls :- Esc to clear all, Backspace to delete, enter to equal, else are same as defined on keyboard");
 
 // calculating function
 function calculate2(string) {
@@ -52,15 +54,23 @@ function calculate1(str) {
     return "err";
 }
 
+// background
+const mainBody = document.querySelector("body");
+mainBody.style.backgroundColor = "#1c1c1b";
+
 // heading
 const heading = document.querySelector(".heading h1");
+heading.style.color = "#f5f5f5";
 heading.style.paddingTop = "15px";
 heading.style.paddingBottom = "10px";
 
 // input
 const input = document.querySelector(".input input");
+input.style.fontFamily = "Roboto, sans-serif";
 input.style.fontSize = "45px";
 input.style.textAlign = "right";
+input.style.backgroundColor = "#c9c9c7";
+input.style.color = "black";
 str = "";
 
 // buttons
@@ -70,6 +80,9 @@ for (let i = 0; i < buttonsArr.length; i++) {
     newbtn.className = "btn";
     newbtn.textContent = `${buttonsArr[i]}`;
     newbtn.value = `${buttonsArr[i]}`;
+    newbtn.style.backgroundColor = "#c9c9c7";
+    newbtn.style.border = "none";
+    newbtn.style.fontFamily = "Roboto, sans-serif";
     let parentEle = document.querySelector(".btns");
     parentEle.appendChild(newbtn);
 }
@@ -98,8 +111,15 @@ buttons.forEach((button) => {
 
 // footer text
 const signature = document.querySelector(".foot p");
+signature.style.color = "#edece8";
+// signature.style.fontWeight = "100";
 signature.style.fontSize = "30px";
 signature.style.paddingTop = "10px";
+
+// disabling input box
+const inputBox = document.querySelector(".input input");
+inputBox.style.border = "2px solid black";
+inputBox.disabled = !inputBox.disabled;
 
 // keyboard support
 document.addEventListener("keydown", (e) => {
