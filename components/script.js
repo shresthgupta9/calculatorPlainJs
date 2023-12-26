@@ -1,3 +1,5 @@
+// keyboard bug- when in input box, each button pressed twice
+
 // calculating function
 function calculate2(string) {
     const value = eval(string);
@@ -25,8 +27,25 @@ function operatorChecker(str) {
     }
     return true;
 }
+function decimalCheck(str) {
+    const n = str.length;
+    let cntDecimal = 0;
+    for (let i = 0; i < n; i++) {
+        if (cntDecimal > 1)
+            return false;
+        if (str[i] === ".")
+            cntDecimal++;
+        if (str[i] === "/" || str[i] === "*" || str[i] === "-" || str[i] === "+")
+            cntDecimal = 0;
+        if (/[a-zA-Z]/.test(str[i]))
+            return false;
+        if (cntDecimal > 1)
+            return false;
+        return true;
+    }
+}
 function calculate1(str) {
-    if (isValidParentheses(str) && operatorChecker(str)) {
+    if (isValidParentheses(str) && operatorChecker(str) && decimalCheck(str)) {
         const value = calculate2(str);
         return value.toString();
     }
@@ -58,19 +77,19 @@ const buttons = document.querySelectorAll(".btn");
 buttons.forEach((button) => {
     button.style.fontSize = "30px";
     button.addEventListener("click", (e) => {
-        if (e.target.value != "C" && e.target.value != "<" && e.target.value != "=") {
+        if (e.target.value !== "C" && e.target.value !== "<" && e.target.value !== "=") {
             str += e.target.value;
             input.value = str;
         }
-        else if (e.target.value == "C") {
+        else if (e.target.value === "C") {
             str = "";
             input.value = str;
         }
-        else if (e.target.value == "<") {
+        else if (e.target.value === "<") {
             str = str.slice(0, -1);
             input.value = str;
         }
-        else if (e.target.value == "=") {
+        else if (e.target.value === "=") {
             str = calculate1(str);
             input.value = str;
         }
@@ -81,6 +100,31 @@ buttons.forEach((button) => {
 const signature = document.querySelector(".foot p");
 signature.style.fontSize = "30px";
 signature.style.paddingTop = "10px";
+
+// keyboard support
+document.addEventListener("keydown", (e) => {
+    const key = e.key;
+    // console.log(key);
+    if (key === "Enter") {
+        const keyPressed = document.querySelector(`.btn[value="="]`);
+        keyPressed.click();
+    }
+    else if (key === "Backspace") {
+        const keyPressed = document.querySelector(`.btn[value="<"]`);
+        keyPressed.click();
+    }
+    else if (key === "Escape") {
+        const keyPressed = document.querySelector(`.btn[value="C"]`);
+        keyPressed.click();
+    }
+    else {
+        const keyPressed = document.querySelector(`.btn[value="${key}"]`); // returns null if can't find.
+        if (keyPressed)
+            keyPressed.click();
+    }
+    // console.log(keyPressed);
+})
+
 
 // media query
 function checkViewportWidth() {
@@ -97,5 +141,3 @@ function checkViewportWidth() {
 checkViewportWidth();
 window.addEventListener("resize", checkViewportWidth);
 window.addEventListener("load", checkViewportWidth);
-
-
